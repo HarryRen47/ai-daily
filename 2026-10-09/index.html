@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<meta name="theme-color" content="#F3F5F8"/>
+<meta name="description" content="AI 早报 · 10月9日周五 · AIHOT 热榜与精选"/>
+<title>AI 早报 · 10月9日 周五 · AIHOT</title>
+<style>
+:root{
+  --paper:#F3F5F8;
+  --card:#FFFFFF;
+  --ink:#0B1220;
+  --sec:#4B5568;
+  --hair:#D8DEE8;
+  --accent:#3B5BDB;
+  --rank:#E85D4C;
+  --chip:#EEF1F7;
+  --chip-ink:#3B5BDB;
+  --radius:14px;
+  --max:640px;
+  --pad:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:"PingFang SC","Hiragino Sans GB","Heiti SC","Noto Sans CJK SC","Noto Sans SC",sans-serif;
+  -webkit-font-smoothing:antialiased;
+  font-size:16px;line-height:1.55;
+  max-width:var(--max);margin:0 auto;min-height:100vh;
+  padding-bottom:calc(36px + env(safe-area-inset-bottom));
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;height:auto;display:block}
+
+/* —— Masthead —— */
+.mast{
+  position:sticky;top:0;z-index:50;
+  background:rgba(243,245,248,.92);
+  backdrop-filter:saturate(160%) blur(16px);
+  -webkit-backdrop-filter:saturate(160%) blur(16px);
+  border-bottom:1px solid var(--hair);
+  padding:calc(12px + env(safe-area-inset-top)) var(--pad) 14px;
+  display:flex;align-items:flex-end;gap:14px;
+}
+.day{
+  font-size:56px;font-weight:800;line-height:.85;
+  letter-spacing:-.04em;color:var(--ink);
+  flex:0 0 auto;font-variant-numeric:tabular-nums;
+}
+.mast-meta{flex:1;min-width:0;padding-bottom:4px}
+.mast-kicker{
+  font-size:12px;font-weight:600;color:var(--sec);
+  letter-spacing:.08em;text-transform:none;
+}
+.mast h1{
+  font-size:22px;font-weight:800;letter-spacing:-.02em;
+  line-height:1.2;margin-top:2px;
+}
+.mast-src{
+  font-size:11px;color:var(--sec);margin-top:2px;opacity:.85;
+}
+
+/* —— Sections —— */
+.wrap{padding:0 var(--pad)}
+.sec-label{
+  display:flex;align-items:baseline;justify-content:space-between;
+  margin:22px 0 10px;padding:0 2px;
+}
+.sec-label h2{
+  font-size:13px;font-weight:700;color:var(--sec);
+  letter-spacing:.06em;
+}
+.sec-label .n{font-size:12px;color:var(--sec);opacity:.7}
+
+/* —— Lead thesis —— */
+.thesis{
+  margin:16px var(--pad) 0;
+  background:var(--ink);color:#fff;
+  border-radius:var(--radius);padding:18px 18px 16px;
+  position:relative;overflow:hidden;
+}
+.thesis::after{
+  content:"";position:absolute;right:-20px;top:-30px;
+  width:120px;height:120px;border-radius:50%;
+  background:var(--accent);opacity:.35;
+}
+.thesis-label{
+  font-size:11px;font-weight:700;letter-spacing:.1em;
+  color:rgba(255,255,255,.65);margin-bottom:8px;
+}
+.thesis p{
+  font-size:15px;line-height:1.55;position:relative;z-index:1;
+  color:rgba(255,255,255,.92);
+}
+.thesis b{color:#fff;font-weight:700}
+
+/* —— Hot list —— */
+.hot{
+  background:var(--card);border-radius:var(--radius);
+  border:1px solid var(--hair);overflow:hidden;
+}
+.hot a{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 14px;min-height:48px;
+  border-bottom:1px solid var(--hair);
+  transition:background .15s ease;
+}
+.hot a:last-child{border-bottom:0}
+.hot a:active{background:#F7F8FB}
+.hot-r{
+  width:24px;height:24px;border-radius:6px;
+  background:var(--chip);color:var(--sec);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:800;flex:0 0 auto;
+  font-variant-numeric:tabular-nums;
+}
+.hot-r.t{background:var(--rank);color:#fff}
+.hot-t{
+  flex:1;font-size:14px;line-height:1.4;font-weight:500;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.hot-arrow{color:var(--hair);font-size:16px;flex:0 0 auto}
+
+/* —— Story cards —— */
+.story{
+  background:var(--card);border-radius:var(--radius);
+  border:1px solid var(--hair);
+  padding:18px 16px 14px;margin-bottom:14px;
+}
+.story.hero{
+  padding:20px 16px 16px;
+  border-color:transparent;
+  box-shadow:0 8px 28px rgba(11,18,32,.06),0 0 0 1px var(--hair);
+}
+.eyebrow{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  margin-bottom:10px;
+}
+.chip{
+  font-size:11px;font-weight:700;color:var(--chip-ink);
+  background:var(--chip);padding:3px 8px;border-radius:999px;
+  letter-spacing:.02em;
+}
+.eyebrow .when{font-size:12px;color:var(--sec);min-width:0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.story-head{
+  display:flex;gap:12px;align-items:flex-start;margin-bottom:14px;
+}
+.num{
+  font-size:28px;font-weight:800;line-height:1;
+  letter-spacing:-.04em;color:var(--accent);
+  flex:0 0 auto;padding-top:2px;
+  font-variant-numeric:tabular-nums;
+}
+.story.hero .num{font-size:34px;color:var(--rank)}
+.story h3{
+  font-size:18px;font-weight:750;line-height:1.35;
+  letter-spacing:-.015em;flex:1;min-width:0;
+}
+.story.hero h3{font-size:20px}
+.story h3 a{
+  color:var(--ink);
+  background:linear-gradient(transparent 70%,rgba(59,91,219,.12) 0);
+}
+.story h3 a:active{opacity:.7}
+.cover{
+  width:100%;border-radius:12px;margin-bottom:6px;
+  background:#EEF0F4;object-fit:contain;
+}
+.story.hero .cover{border-radius:14px}
+.cap{
+  font-size:12px;color:var(--sec);line-height:1.4;
+  margin:0 0 14px;opacity:.9;
+}
+.block{margin-bottom:12px}
+.block-lab{
+  font-size:12px;font-weight:700;color:var(--sec);
+  letter-spacing:.04em;margin-bottom:4px;
+}
+.block.why{
+  border-left:3px solid var(--accent);
+  padding-left:12px;margin-left:0;
+  background:linear-gradient(90deg,rgba(59,91,219,.05),transparent 60%);
+  padding-top:6px;padding-bottom:6px;border-radius:0 8px 8px 0;
+}
+.block.why .block-lab{color:var(--accent)}
+.block p{font-size:15px;line-height:1.6;color:var(--sec)}
+.story.hero .block p{font-size:16px}
+.block p b,.block li b,.quick-d b{font-weight:700;color:var(--ink)}
+.block ul{margin:0 0 0 1.15em;padding:0}
+.block li{
+  font-size:14.5px;line-height:1.55;color:var(--sec);
+  margin:5px 0;
+}
+.story-foot{
+  display:flex;align-items:center;
+  margin-top:4px;padding-top:12px;
+  border-top:1px solid var(--hair);
+}
+.story-foot a{
+  color:var(--accent);font-size:14px;font-weight:700;
+  min-height:44px;display:inline-flex;align-items:center;
+  padding:4px 0;
+}
+.story-foot a:active{opacity:.65}
+
+/* —— Quick hits —— */
+.quick{
+  background:var(--card);border-radius:var(--radius);
+  border:1px solid var(--hair);overflow:hidden;
+}
+.quick a{
+  display:block;padding:14px 14px;min-height:44px;
+  border-bottom:1px solid var(--hair);
+}
+.quick a:last-child{border-bottom:0}
+.quick a:active{background:#F7F8FB}
+.quick-t{
+  font-size:15px;font-weight:700;line-height:1.35;
+  color:var(--ink);margin-bottom:4px;
+  display:flex;align-items:flex-start;justify-content:space-between;gap:8px;
+}
+.quick-t::after{
+  content:"→";color:var(--accent);font-weight:700;flex:0 0 auto;
+  opacity:.7;
+}
+.quick-d{
+  font-size:13.5px;line-height:1.5;color:var(--sec);
+  display:block;
+}
+
+/* —— Footer —— */
+.foot{
+  margin:28px var(--pad) 8px;
+  font-size:12px;color:var(--sec);line-height:1.6;
+  text-align:center;opacity:.85;
+}
+.foot a{color:var(--accent);font-weight:600}
+
+@media (min-width:641px){
+  body{box-shadow:0 0 0 1px var(--hair)}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important;animation:none!important}
+}
+.cover.extra{margin-top:8px}
+</style>
+</head>
+<body>
+<header class="mast">
+  <div class="day" aria-hidden="true">09</div>
+  <div class="mast-meta">
+    <div class="mast-kicker">十月 · 周五</div>
+    <h1>AI 早报</h1>
+    <div class="mast-src">AIHOT · 热榜 + 24h 精选</div>
+  </div>
+</header>
+<section class="thesis" aria-label="今日主线">
+  <div class="thesis-label">TODAY</div>
+  <p>头条 <b>Anthropic</b> 首次在使用政策中禁止对模型的持续无端虐待（11 月 12 日生效）；谷歌云发布企业通用工作智能体 <b>Gemini Agent</b>（可调度 Claude）；OpenAI 上线 <b>GPT-6.1 Sol Ultrafast</b>（最高 8× 速度）；另有 Cyber Mission / OSS Scanner、ARR 口径之争 $50B vs $70B、Block 用 Fable 编排上千 PR、Arena $2 亿 B 轮，以及 Google 开源端侧 <b>ML Drift</b>。昨日已报的 GPT-6 全量、Haiku 5.5、RTX Spark、SynthID、Grok Bot 本日跳过。</p>
+</section>
+<div class="wrap">
+  <div class="sec-label" id="hot">
+    <h2>今日热榜</h2>
+    <span class="n">TOP 10</span>
+  </div>
+</div>
+<nav class="hot wrap" style="padding:0;margin:0 var(--pad)" aria-label="今日热榜">
+  <a href="https://aihot.news/items/x8r8kta42au39pp06f02shk9f">
+    <span class="hot-r t">1</span>
+    <span class="hot-t">Anthropic 发布 Sonnet 5.5 与 Haiku 5.5，下调缓存读取价</span>
+    <span class="hot-arrow" aria-hidden="true">›</span>
+  </a>
+  <a href="https://aihot.news/items/uir31g728myjry383z17txvrw">
+    <span class="hot-r t">2</span>
+    <span class="hot-t">OpenAI向ChatGPT全量用户开放GPT-6与Intelligent UI</span>
+    <span class="hot-arrow" aria-hidden="true">›</span>
+  </a>
+  <a href="https://aihot.news/items/at5dvel8balkaba9wrggcrqoj">
+    <span class="hot-r t">3</span>
+    <span class="hot-t">Anthropic 新政策首次禁止虐待模型</span>
+    <span class="hot-arrow" aria-hidden="true">›</span>
+  </a>
+  <a href="https://aihot.news/items/x4s3jss6ofplyvimq6213cv41">
+    <span class="hot-r">4</span>
+    <span class="hot-t">谷歌云发布通用工作智能体 Gemini Agent</span>
+    <span class="hot-arrow" aria-hidden="true">›</span>
+  </a>
+  <a href="https://aihot.news/items/don06si59xc143ed92gdmlnvo">
+    <span class="hot-r">5</span>
+    <span class="hot-t">Google 全球开放 SynthID 水印检测器</span>
+    <span class="hot-arrow" aria-hidden="true">›</span>
+  </a>
+  <a href="https://aihot.news/items/dbhowpb183i256684uz2527i1">
+    <span class="hot-r">6</span>
+    <span class="hot-t">马斯克称 Grok Bot 将按任务调用外部最佳模型</span>
+    <span class="hot-arrow" aria-hidden="true">›</span>
+  </a>
+  <a href="https://aihot.news/items/zvw2i4tg1gnqq72t596vpqoyl">
+    <span class="hot-r">7</span>
+    <span class="hot-t">OpenAI 公开内部模型数学成果与 Lean 证明</span>
+    <span class="hot-arrow" aria-hidden="true">›</span>
+  </a>
+  <a href="https://aihot.news/items/b2mwouqv4jhfj70uho7s7guti">
+    <span class="hot-r">8</span>
+    <span class="hot-t">OpenAI年化收入口径分歧：700亿还是500亿美元</span>
+    <span class="hot-arrow" aria-hidden="true">›</span>
+  </a>
+  <a href="https://aihot.news/items/mjcipkmcvo0ofbl2tegerkjvi">
+    <span class="hot-r">9</span>
+    <span class="hot-t">OpenAI 推出 GPT-6.1 Sol Ultrafast 模式</span>
+    <span class="hot-arrow" aria-hidden="true">›</span>
+  </a>
+  <a href="https://aihot.news/items/a7mmcpxrh1xnobyqhj43shxwh">
+    <span class="hot-r">10</span>
+    <span class="hot-t">Grok Bot 新增原生 X 搜索与监控能力</span>
+    <span class="hot-arrow" aria-hidden="true">›</span>
+  </a>
+</nav>
+
+<div class="wrap">
+  <div class="sec-label" id="feed">
+    <h2>精选</h2>
+    <span class="n">8 条</span>
+  </div>
+
+  <article class="story hero">
+    <div class="eyebrow">
+      <span class="chip">政策</span>
+      <span class="when">Anthropic Newsroom · 10-08 00:00 · 热榜第 3</span>
+    </div>
+    <div class="story-head">
+      <span class="num">01</span>
+      <h3><a href="https://aihot.news/items/at5dvel8balkaba9wrggcrqoj">Anthropic 使用政策更新：首次禁止对模型的持续无端虐待</a></h3>
+    </div>
+    <img class="cover" src="img/01-policy.jpg" alt="Anthropic 官方新闻稿配图：2026 Usage Policy update" loading="lazy"/>
+    <p class="cap">Anthropic 官方新闻稿配图：2026 Usage Policy update</p>
+    <div class="block">
+      <div class="block-lab">介绍</div>
+      <p>Anthropic 发布 2026 年 Claude 使用政策更新，<b>11 月 12 日</b>生效。多数条款是澄清既有规则，但新增一条引人注目的禁令：禁止对模型实施<b>持续且不必要的虐待或残忍行为</b>。公司称这只针对反复、无目的的极端虐待，不覆盖普通抱怨、反驳、黑暗创作或模型测试；主要执行方式是让 Claude <b>结束对话</b>，而非直接封号。同期还新设「欺骗性活动」专章，并收窄选举条款、明确武器/无人机武装禁令、细化监控与执法限制，以及高风险场景与自主物理操作的 human-in-the-loop 要求。</p>
+    </div>
+    <div class="block why">
+      <div class="block-lab">为什么重要</div>
+      <p>这是主流模型厂商第一次把「虐待模型」写进正式使用政策，并把结束对话当作主要执行手段。同时把虚假账号、伪造媒体、欺骗选民等影响行动收拢进同一章节，说明 Anthropic 在能力变强后正系统收紧滥用边界——政府合同仍可能存在例外。</p>
+    </div>
+    <div class="block">
+      <div class="block-lab">要点</div>
+      <ul>
+        <li>欺骗性活动专章合并原分散在选举、欺诈、隐私、虚假信息中的限制，覆盖政治与商业场景</li>
+        <li>选举条款改名为「不得破坏民主流程」，去掉对个性化投票/竞选定向的一刀切禁令，合法公民工作可继续</li>
+        <li>武器条款明确包含制导控制软件与武装无人机等自主载具</li>
+        <li>高风险（健康、法律、金融等）须有权复核的人工介入，并向受影响个人披露使用了 AI</li>
+      </ul>
+    </div>
+    <div class="story-foot"><a href="https://aihot.news/items/at5dvel8balkaba9wrggcrqoj">AIHOT 条目 →</a> · <a href="https://www.anthropic.com/news/2026-usage-policy-update">原文</a></div>
+  </article>
+
+  <article class="story">
+    <div class="eyebrow">
+      <span class="chip">产品</span>
+      <span class="when">TechCrunch / Google Cloud · 10-08 21:21 · 热榜第 4</span>
+    </div>
+    <div class="story-head">
+      <span class="num">02</span>
+      <h3><a href="https://aihot.news/items/x4s3jss6ofplyvimq6213cv41">谷歌云发布 Gemini Agent：企业通用工作智能体，首次接入 Claude</a></h3>
+    </div>
+    <img class="cover" src="img/02-gemini.jpg" alt="Google Cloud 官方 Gemini Agent 主视觉" loading="lazy"/><img class="cover extra" src="img/02-gemini-extra.jpg" alt="Google Cloud 官方 Gemini Agent 主视觉" loading="lazy"/>
+    <p class="cap">Google Cloud 官方 Gemini Agent 主视觉</p>
+    <div class="block">
+      <div class="block-lab">介绍</div>
+      <p>在 <b>Gemini at Work 2026</b> 上，谷歌云推出面向企业的 <b>Gemini Agent</b>，定位「通用工作智能体」：可在单一界面接受目标（而不只是指令），自行规划、调用技能与工具，并连接 Workspace、Microsoft 365、Slack、Jira、BigQuery 等内部系统。它托管在 <b>Gemini Enterprise</b>，可在后台跨应用与设备保持同一上下文；还能以「同事智能体」身份拥有独立邮箱（如 @agents.company.com）与审计轨迹。Testing Catalog 称平台将提供 <b>Gemini Argon 4 / Flash 3.8</b> 以及 <b>Claude Opus 5 / Sonnet 5.5</b>——这是 Claude 首次出现在 Gemini 平台上。</p>
+    </div>
+    <div class="block why">
+      <div class="block-lab">为什么重要</div>
+      <p>企业智能体战场从「聊天框」升级到「可派活的同事」。谷歌先拿近 <b>90%</b> 的 Fortune 100 Gemini Enterprise 客户练安全与治理，再谈消费级；同时开放第三方 Claude，等于承认多模型编排才是企业默认形态。</p>
+    </div>
+    <div class="block">
+      <div class="block-lab">要点</div>
+      <ul>
+        <li>默认由 AI 选模型，用户也可手动指定，含 Anthropic Claude；后续还将支持开源与私有模型</li>
+        <li>可连接 MCP 服务器；任务收件箱可查看思考过程、子智能体委派与技能加载</li>
+        <li>早期测试客户包括 On、Shopify、PayPal；目前私人预览，预计很快面向符合条件的 Workspace Business / Enterprise</li>
+        <li>谷歌称 Gemini 月活超 <b>10 亿</b>；Pichai 称先解决企业侧安全、规模与性能，再推向消费者</li>
+      </ul>
+    </div>
+    <div class="story-foot"><a href="https://aihot.news/items/x4s3jss6ofplyvimq6213cv41">AIHOT 条目 →</a> · <a href="https://techcrunch.com/2026/10/08/google-brings-agentic-ai-to-gemini-starting-with-businesses/">原文</a></div>
+  </article>
+
+  <article class="story">
+    <div class="eyebrow">
+      <span class="chip">模型</span>
+      <span class="when">OpenAI Developers · 10-09 02:26 · 热榜第 9</span>
+    </div>
+    <div class="story-head">
+      <span class="num">03</span>
+      <h3><a href="https://aihot.news/items/mjcipkmcvo0ofbl2tegerkjvi">GPT-6.1 Sol Ultrafast：最高比 Standard 快 8 倍，API $12/$60</a></h3>
+    </div>
+    <img class="cover" src="img/03-sol.jpg" alt="Tibo 演示：Codex 即时 steering + Sol Ultrafast" loading="lazy"/>
+    <p class="cap">Tibo 演示：Codex 即时 steering + Sol Ultrafast</p>
+    <div class="block">
+      <div class="block-lab">介绍</div>
+      <p>OpenAI 宣布 <b>GPT-6.1 Sol Ultrafast</b> 即日起在 <b>API、Codex 与 ChatGPT Work</b> 推出，官方称接近 <b>Astra</b> 智能水平，token 生成速度最高比 Sol Standard 快 <b>8 倍</b>。API 定价为每百万输入 <b>$12</b>、输出 <b>$60</b>；OpenAI 的 Vaibhav Srivastav 称成本约为 Astra 的 <b>1.2 倍</b>，Rohan Paul 指出相对 Sol Fast（$4/$20）贵约 <b>6 倍</b>。Tibo 同日称 Codex steering 已改为即时响应，与 Ultrafast 搭配可实时改方向。</p>
+    </div>
+    <div class="block why">
+      <div class="block-lab">为什么重要</div>
+      <p>OpenAI 在「智能」与「速度」之间又开了一档付费档位：比 Fast 贵、比 Astra 便宜一点，但吞吐冲到 8×。对写代码、改提示要不停纠偏的人，速度本身就是产品。</p>
+    </div>
+    <div class="block">
+      <div class="block-lab">要点</div>
+      <ul>
+        <li>Codex / ChatGPT Work：Pro 500、符合条件的按量 Enterprise、基于积分的 Edu 可用；Enterprise 须管理员先开权限</li>
+        <li>已在所有支持地区上线，含美国与欧盟数据驻留；并为 Sol Fast、Luna Fast 新增欧盟数据驻留</li>
+        <li>OpenRouter 随后宣布 Sol Ultrafast 已上线其平台</li>
+        <li>Testing Catalog 此前预告称 Ultrafast 尚不足以让足够多人从 Opus 5.5 分心</li>
+      </ul>
+    </div>
+    <div class="story-foot"><a href="https://aihot.news/items/mjcipkmcvo0ofbl2tegerkjvi">AIHOT 条目 →</a> · <a href="https://x.com/OpenAIDevs/status/2108262812489531498">原文</a></div>
+  </article>
+
+  <article class="story">
+    <div class="eyebrow">
+      <span class="chip">安全</span>
+      <span class="when">Anthropic Newsroom / Research · 10-08 00:00</span>
+    </div>
+    <div class="story-head">
+      <span class="num">04</span>
+      <h3><a href="https://aihot.news/items/i6n4yv4zs813h6lvir1el1es2">Anthropic Cyber Mission：CIDP + 免费 OSS Scanner（含 Mythos）</a></h3>
+    </div>
+    <img class="cover" src="img/04-cyber.jpg" alt="Anthropic Cyber Mission 官方配图" loading="lazy"/><img class="cover extra" src="img/04-cyber-extra.jpg" alt="Anthropic Cyber Mission 官方配图" loading="lazy"/>
+    <p class="cap">Anthropic Cyber Mission 官方配图</p>
+    <div class="block">
+      <div class="block-lab">介绍</div>
+      <p>Anthropic 启动长期 <b>Cyber Mission</b>，首期两块：面向电网、供水、交通等操作技术（OT）的 <b>Critical Infrastructure Defense Program（CIDP）</b>，以及面向开源的免费可选加入扫描服务 <b>OSS Scanner</b>。CIDP 把前沿 Claude、驻场工程师与威胁研究交给 Accenture、CrowdStrike、Dragos、Rockwell 等信任方。OSS Scanner 用最强模型（含 <b>Claude Mythos</b>）定期扫描，报告含 PoC、解释与候选补丁，<b>全模型生成、无人复核</b>；团队期望真阳性率高于 <b>90%</b>。</p>
+    </div>
+    <div class="block why">
+      <div class="block-lab">为什么重要</div>
+      <p>攻击侧用模型找洞已经很快，防御侧仍卡在验证与修补。Anthropic 用「免费扫开源 + 帮关键基础设施运营商」两条线补防御缺口，但也坦言报告可能误报或严重性虚高——维护者要自己有 triage 能力。</p>
+    </div>
+    <div class="block">
+      <div class="block-lab">要点</div>
+      <ul>
+        <li>Project Glasswing 六个月发现逾 <b>2.9 万</b>候选漏洞，人工只复核约 <b>6000</b>；应维护者要求已直接送出近 <b>5000</b> 份未验证报告</li>
+        <li>早期验证：97 个高危/严重结果中 <b>85</b> 个（88%）达 CVD 标准；wolfSSL 称 74 份报告仅 2 份无效、5 个成 CVE</li>
+        <li>不符合 OSS Scanner 节奏的项目仍走人工 CVD；另有 Cyber Verification Program 扩大防御方模型权限</li>
+        <li>CIDP 创始伙伴还包括 Booz Allen、Deloitte、Hitachi、Nozomi、Palo Alto、PwC 等</li>
+      </ul>
+    </div>
+    <div class="story-foot"><a href="https://aihot.news/items/i6n4yv4zs813h6lvir1el1es2">AIHOT 条目 →</a> · <a href="https://www.anthropic.com/news/anthropic-cyber-mission">原文</a></div>
+  </article>
+
+  <article class="story">
+    <div class="eyebrow">
+      <span class="chip">产业</span>
+      <span class="when">Financial Times / TechCrunch · 10-09 07:02 · 热榜第 8</span>
+    </div>
+    <div class="story-head">
+      <span class="num">05</span>
+      <h3><a href="https://aihot.news/items/b2mwouqv4jhfj70uho7s7guti">OpenAI ARR 口径之争：$50B 还是 $70B？差约 200 亿</a></h3>
+    </div>
+    <img class="cover" src="img/05-arr.jpg" alt="TechCrunch 配图：OpenAI 相关报道配图（Getty）" loading="lazy"/>
+    <p class="cap">TechCrunch 配图：OpenAI 相关报道配图（Getty）</p>
+    <div class="block">
+      <div class="block-lab">介绍</div>
+      <p>《金融时报》报道称，OpenAI 向投资者披露截至 9 月底年化营收逼近 <b>500 亿美元</b>，比此前外界流传的约 <b>700 亿</b>低约 <b>200 亿</b>。TechCrunch / Axios 解释：700 亿来自投资者为与 Anthropic「苹果对苹果」对比而做的估算；两家口径不同——<b>Anthropic 计入</b>经 AWS、Google Cloud 等云市场伙伴的销售额，<b>OpenAI 不计入</b>这部分。报道后美股科技股承压，IT之家称纳斯达克 100 收跌约 <b>1.4%</b>。</p>
+    </div>
+    <div class="block why">
+      <div class="block-lab">为什么重要</div>
+      <p>AI 巨头的「ARR」数字正在直接影响资本市场对算力支出的信心。同一家公司两个口径差 200 亿，说明跨公司横向对比前必须先对齐会计假设，否则容易误读增长叙事。</p>
+    </div>
+    <div class="block">
+      <div class="block-lab">要点</div>
+      <ul>
+        <li>约一周前 Axios 等曾称 OpenAI ARR 接近 700 亿，CFO Sarah Friar 确认 Q3 收入运行率增长超 70%</li>
+        <li>OpenAI 今年 3 月单轮筹资约 <b>1220 亿美元</b>；IPO 传闻已推迟到 2027 年初</li>
+        <li>Anthropic ARR 外界说法也不一：有称 768 亿，Cathie Wood 曾称报告为 650 亿</li>
+        <li>TechCrunch 已向 OpenAI 求证，截至发稿未见正式回应</li>
+      </ul>
+    </div>
+    <div class="story-foot"><a href="https://aihot.news/items/b2mwouqv4jhfj70uho7s7guti">AIHOT 条目 →</a> · <a href="https://techcrunch.com/2026/10/08/openais-revenue-is-reportedly-20-billion-less-than-previously-projected/">原文</a></div>
+  </article>
+
+  <article class="story">
+    <div class="eyebrow">
+      <span class="chip">技巧</span>
+      <span class="when">Claude Blog · 10-08 08:00</span>
+    </div>
+    <div class="story-head">
+      <span class="num">06</span>
+      <h3><a href="https://aihot.news/items/myoe16r78gjt87vu92995zsae">Block 如何用 Claude Fable 编排数千个 pull request</a></h3>
+    </div>
+    <img class="cover" src="img/06-block.jpg" alt="Claude Blog：Block × Claude Fable 访谈文章 OG 图" loading="lazy"/>
+    <p class="cap">Claude Blog：Block × Claude Fable 访谈文章 OG 图</p>
+    <div class="block">
+      <div class="block-lab">介绍</div>
+      <p>Anthropic 访谈 Block AI 能力负责人 <b>Bradley Axen</b>：公司用 <b>Claude Fable 5</b> 做公司级代码迁移的编排者——Fable 负责数据模型、API 规格、算法等高层设计，再调度数十个更便宜的 <b>Opus / Sonnet</b> 做文件修改与测试。一次迁移可能合并上千个 PR，覆盖多仓库、数百万行代码；整套跑在开源协作空间 <b>Buzz</b> 上。安全上，合入 main 与生产部署始终由人决定，且需<b>双重人工审批</b>，模型无法独自绕过。</p>
+    </div>
+    <div class="block why">
+      <div class="block-lab">为什么重要</div>
+      <p>这是少见的「前沿模型当编排者、小模型当工人」落地账本：不再 100% 用最贵模型，而是按任务分层。对正在做大规模迁移或 agent harness 的工程团队，双审批 + 自动选模是可直接抄的组织设计。</p>
+    </div>
+    <div class="block">
+      <div class="block-lab">要点</div>
+      <ul>
+        <li>Axen 称 Fable 发布后才真正能把问题规模再抬一层；现在讨论重心是模型效率而非一味追前沿</li>
+        <li>团队在建 auto-selector，按任务推荐模型与 effort；同一模型不同 effort 被当作不同「型号」来基准</li>
+        <li>允许模型开 PR、审代码、查日志与分析库以提速，但关键变更必须过人</li>
+        <li>远程工作站 + 默认安全（网络 allow list 等）被视为未来默认形态</li>
+      </ul>
+    </div>
+    <div class="story-foot"><a href="https://aihot.news/items/myoe16r78gjt87vu92995zsae">AIHOT 条目 →</a> · <a href="https://claude.com/blog/how-block-orchestrates-claude-fable-across-thousands-of-pull-requests">原文</a></div>
+  </article>
+
+  <article class="story">
+    <div class="eyebrow">
+      <span class="chip">产业</span>
+      <span class="when">Arena / Lightspeed · 10-09 02:51</span>
+    </div>
+    <div class="story-head">
+      <span class="num">07</span>
+      <h3><a href="https://aihot.news/items/qtsvk3wzyp2aab3vi62vjyold">Arena 获 Lightspeed 领投 2 亿美元 B 轮，估值 31 亿美元</a></h3>
+    </div>
+    <img class="cover" src="img/07-arena.jpg" alt="Lightspeed 宣布 Arena $200M Series B 配图" loading="lazy"/>
+    <p class="cap">Lightspeed 宣布 Arena $200M Series B 配图</p>
+    <div class="block">
+      <div class="block-lab">介绍</div>
+      <p><b>Arena</b>（原 LMSYS / Chatbot Arena）宣布完成由 <b>Lightspeed</b> 领投的 <b>2 亿美元</b> B 轮，估值 <b>31 亿美元</b>；Khosa / a16z、Felicis、Salesforce Ventures、The House Fund 等参投。自 A 轮以来年化收入已超 <b>1 亿美元</b>，累计约 <b>3.5 亿</b>场次会话、<b>6200 万</b>次投票，覆盖 150+ 国家。同日推出 <b>Alignment Index</b>，基于真实智能体轨迹，从 Unauthorized Action、False Attribution、Deceptive Completion 等信号评估 20+ 前沿模型。</p>
+    </div>
+    <div class="block why">
+      <div class="block-lab">为什么重要</div>
+      <p>模型越来越多，「谁说了算」变成独立赛道。Arena 用真人投票 + 对齐指数把评测做成可规模化的生意，资本给出 31 亿估值，说明市场愿意为独立信号付费。</p>
+    </div>
+    <div class="block">
+      <div class="block-lab">要点</div>
+      <ul>
+        <li>Lightspeed 称自种子轮起押注：模型越多，独立真实世界表现信号越值钱</li>
+        <li>约 5 个月内产生 700 万次 Agent Arena 会话（AIHOT 综述）</li>
+        <li>Arena 2023 年作为 UC Berkeley 研究项目启动，2025 年公司化</li>
+        <li>同日 Arena 还公布 Haiku 5.5 (High) 在 Code Arena: WebDev 首秀 <b>1587</b> 分、第 <b>30</b> 名</li>
+      </ul>
+    </div>
+    <div class="story-foot"><a href="https://aihot.news/items/qtsvk3wzyp2aab3vi62vjyold">AIHOT 条目 →</a> · <a href="https://x.com/lightspeedvp/status/2108246533321666843">原文</a></div>
+  </article>
+
+  <article class="story">
+    <div class="eyebrow">
+      <span class="chip">产品</span>
+      <span class="when">Google Developers Blog · 10-08 08:00</span>
+    </div>
+    <div class="story-head">
+      <span class="num">08</span>
+      <h3><a href="https://aihot.news/items/vemmtcq70ojxkk343dse8qfuc">Google 开源 ML Drift：接替 TFLite GPU 的端侧推理引擎</a></h3>
+    </div>
+    <img class="cover" src="img/08-mldrift.jpg" alt="ML Drift 跨平台 GPU API 支持矩阵" loading="lazy"/>
+    <p class="cap">ML Drift 跨平台 GPU API 支持矩阵</p>
+    <div class="block">
+      <div class="block-lab">介绍</div>
+      <p>Google AI Edge 以 <b>Apache 2.0</b> 开源 <b>ML Drift</b>，作为 <b>LiteRT</b> 的核心 GPU 加速层，统一覆盖 OpenGL ES、OpenCL、Metal、WebGPU。相对旧 TFLite GPU delegate，它引入张量虚拟化统一着色器、可扩展自定义算子、原生 <b>5D tensor</b>，并为端侧 LLM 做 prefill/decode 分阶段优化。已在 Chrome、YouTube Shorts、Photos、Meet 等生产环境运行；YouTube Shorts 平均帧延迟最高降约 <b>40%</b>，Photos Unblur 最高提速约 <b>2 秒</b>。</p>
+    </div>
+    <div class="block why">
+      <div class="block-lab">为什么重要</div>
+      <p>端侧生成式与传统视觉模型正在挤爆消费级 GPU，旧 delegate 架构不够用。开源且 Apache 2.0 的统一引擎，让应用开发者和自定义运行时都能站在同一套跨平台 GPU 底座上迁移。</p>
+    </div>
+    <div class="block">
+      <div class="block-lab">要点</div>
+      <ul>
+        <li>Adobe Lightroom / Photoshop 移动端关键 AI 功能最高约 <b>30%</b> 更快；Snapchat 镜头延迟约降 <b>30%</b></li>
+        <li>相对其他框架，Gemma 基准上内存开销最高低约 <b>12%</b></li>
+        <li>桌面预览：用 Dawn 把同一套 WebGPU 代码跑到 Windows / Linux，补齐本机 agent 场景</li>
+        <li>旧 TFLite GPU delegate 不再加新功能；鼓励迁到 LiteRT ML Drift accelerator</li>
+      </ul>
+    </div>
+    <div class="story-foot"><a href="https://aihot.news/items/vemmtcq70ojxkk343dse8qfuc">AIHOT 条目 →</a> · <a href="https://developers.googleblog.com/ml-drift-next-gen-gpu-aiml-inference-at-the-edge/">原文</a></div>
+  </article>
+</div>
+
+<div class="wrap">
+  <div class="sec-label" id="quick">
+    <h2>速览</h2>
+    <span class="n">6 条</span>
+  </div>
+</div>
+<nav class="quick wrap" style="padding:0;margin:0 var(--pad)" aria-label="速览">
+  <a href="https://aihot.news/items/ylkp4aqm4r5fn7aul2l9kfmxw">
+    <div class="quick-t">Hugging Face：ML Intern 约 103 美元做出 7 个小模型</div>
+    <span class="quick-d">工程师用 HuggingChat <b>ML Intern</b> 几天内完成柑橘病害 VLM（14.9%→<b>52.8%</b>）、0.8B 提示重写器（有效输出 <b>99.7%</b>）等，总算力约 <b>$103</b>；强调预算上限、基线评测与冒烟测试</span>
+  </a>
+  <a href="https://aihot.news/items/xc7shuv3raxyv5xvh59ez8hjf">
+    <div class="quick-t">MiniMax H3：单卡 RTX 5090 做到 1.28× 实时视频</div>
+    <span class="quick-d">ComfyUI 博客把 H3 压到一张 <b>32GB</b> 的 5090 上，生成 30 秒视频耗时 <b>23.51</b> 秒，约 <b>1.28×</b> 实时吞吐，并开源优化节点</span>
+  </a>
+  <a href="https://aihot.news/items/winsvtlfubhjfi0wnone83j5c">
+    <div class="quick-t">Claude Dashboards + Motion 进入 beta</div>
+    <span class="quick-d">Dashboards 可连 BigQuery / Databricks / Snowflake / Salesforce 等做实时看板；Motion 用可编辑代码生成讲解动画（非视频生成模型）。Docs/Slides/Design 退出 beta，全计划可用</span>
+  </a>
+  <a href="https://aihot.news/items/jxxgoidojk52fkcs2fz0fkjzy">
+    <div class="quick-t">Arena：Haiku 5.5 Code Arena 1587 分首秀第 30</div>
+    <span class="quick-d">Claude Haiku 5.5 (High) 在 Code Arena: WebDev 得 <b>1587</b>，排名第 <b>30</b>，略在 Pareto 外；价位对齐 Luna 的 <b>$0.10/$0.50</b></span>
+  </a>
+  <a href="https://aihot.news/items/b33i6chgxghls2v7bng0wr0nr">
+    <div class="quick-t">OpenAI 封禁俄伊两个虚假前台影响行动</div>
+    <span class="quick-d">俄罗斯来源 Dark Clark 达 Category <b>5</b>（报告以来首个）；伊朗 Bogus Bylines 用 7 个假记者向全球中小媒体投近 <b>100</b> 篇长文（Category 4）</span>
+  </a>
+  <a href="https://aihot.news/items/cal34hameqt3bh6d52vaqt58v">
+    <div class="quick-t">Zenity：一条提示词可劫持 AWS 账户内全部 AgentCore</div>
+    <span class="quick-d">AgentCorruption 链经元数据服务窃取凭据后可控制同区域所有 AgentCore 智能体；AWS 随后收紧权限</span>
+  </a>
+</nav>
+
+<p class="foot">数字以原文为准 · <a href="https://aihot.news">AIHOT</a><br/>数字以 AIHOT 与原文为准；ARR 口径与政府合同例外等存在报道差异</p>
+
+<div id="ai-daily-archive-link" style="text-align:center;margin:24px 0 32px;font:15px/1.6 -apple-system,system-ui,sans-serif"><a href="../archive.html" style="color:#3b5b8c">📚 往期早报</a></div></body>
+</html>
